@@ -269,7 +269,8 @@ with stats_dash:
          select_ciudad = st.selectbox(
          'Select a city',(VALLEDELCAUCA))
 
-    data_2_fil= data_2.loc[data_2.Ciudad == select_ciudad]
+    data_2_fil= data_2.loc[data_2.loc[:,'Ciudad'] == select_ciudad]
+    
 
     st.write(data_2_fil.head(10))
     st.write(data_2_fil.describe())
@@ -285,7 +286,7 @@ with stats_dash:
 
 #giving format to coordinates
 gen_map = gea
-gea_2= gea.loc[gea.Ciudad == select_ciudad]
+gea_2= gea.loc[gea.loc[:,'Ciudad'] == select_ciudad]
 gea_2["Lat"] = gea_2["Lat"].apply(lambda x: x.replace(',', '.'))
 gea_2["Lon"] = gea_2["Lon"].apply(lambda x: x.replace(',', '.'))
 gea_2['Lat'] = gea_2['Lat'].astype(float)
