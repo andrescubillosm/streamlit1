@@ -167,7 +167,7 @@ url_6 = 'csv/ago.csv' # DATA DE AGOTADOS
 
 
 #loading data
-gea = pd.read_csv(url_1)
+gea = pd.read_csv(url_1, delimiter=";")
 data_2 = pd.read_csv(url_2)
 data_3 = pd.read_csv(url_3)
 data_4 = pd.read_csv(url_4)
