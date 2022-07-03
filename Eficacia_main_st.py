@@ -269,7 +269,7 @@ with stats_dash:
          select_ciudad = st.selectbox(
          'Select a city',(VALLEDELCAUCA))
 
-    data_2_fil= data_2.loc[data_2['Ciudad'] == select_ciudad]
+    data_2_fil= data_2.loc[data_2.Ciudad == select_ciudad]
 
     st.write(data_2_fil.head(10))
     st.write(data_2_fil.describe())
