@@ -68,8 +68,11 @@ map_dash= st.container()
 with head_dash:
     st.image('https://www.eficacia.com.co/wp-content/uploads/2020/05/logo.svg')
     st.title(":card_file_box: Out of Stock Eficacia")
+    st.markdown("Business problem: Ensuring product availability on the shelf is essential for today's retail sector, so much so that it is considered a measure of retail performance. Retail is a highly competitive industry, and it is imperative to ensure that products are on the shelf when the customer is buying them.")
+    st.markdown(" Business Impact: Out-of-stocks is a major problem in retailing, as it leads to lost sales and reduced customer loyalty, because the term 'out-of-stocks' is used to describe a situation where a consumer cannot find the product on the shelf at the time, he or she wants to buy it.")
     st.markdown("This dashboard will show information analyzed with the data provided. See each of the sections or tabs on the right side, such as general information, exploratory data analysis, the analysis model used and the conclusions. ")
     st.markdown("The team 108 work with 7 datasets in CSV format were received from the company Eficacia. As show the following table")
+
     code_table = """
     <table>
 <thead>
@@ -134,50 +137,46 @@ with head_dash:
 
 #sidebar
 st.sidebar.title("Business problem")
-st.sidebar.markdown("Business problem: Ensuring product availability on the shelf is essential for today's retail sector, so much so that it is considered a measure of retail performance. Retail is a highly competitive industry, and it is imperative to ensure that products are on the shelf when the customer is buying them.")
-st.sidebar.markdown(" Business Impact: Out-of-stocks is a major problem in retailing, as it leads to lost sales and reduced customer loyalty, because the term 'out-of-stocks' is used to describe a situation where a consumer cannot find the product on the shelf at the time, he or she wants to buy it.")
 st.sidebar.markdown("Developed by team 108 :globe_with_meridians: for DS4A Colombia cohort 6.")
-st.sidebar.markdown(" :copyright: 2022 &copy;")
+st.sidebar.write(f'''
+    <a target="_blank" href="https://main.d1bdwgv20qxgp9.amplifyapp.com/index.html">
+        <button>
+            Return to project page
+        </button>
+    </a>
+    ''',
+    unsafe_allow_html=True
+)
+st.sidebar.markdown(" &copy; 2022 &copy;")
 
 #Adding datasets
-url_1 = 'https://eficaciadata.s3.amazonaws.com/geodata.csv' # Data of geographic points of the stores
+#url_1 = 'https://eficaciadata.s3.amazonaws.com/geodata.csv' # Data of geographic points of the stores
 #url_2 = 'https://eficaciadata.s3.amazonaws.com/pro_pre_pdv.csv' # Data of products-Prices-stores
 #url_3 = 'https://eficaciadata.s3.amazonaws.com/pre.csv'# Data of prices
 #url_4 = 'https://eficaciadata.s3.amazonaws.com/pro.csv' # DATA DE PRODUCTOS
-#url_5 = 'https://eficaciadata.s3.amazonaws.com/ago_pdv_pro.csv' # Data of products out stock for store and type of product
-#url_6 = 'https://eficaciadata.s3.amazonaws.com/ago.csv' # DATA DE AGOTADOS
+url_5 = 'https://eficaciadata.s3.amazonaws.com/ago_pdv_pro.csv' # Data of products out stock for store and type of product
+url_6 = 'https://eficaciadata.s3.amazonaws.com/ago.csv' # DATA DE AGOTADOS
 
 url_1 = 'csv/geodata.csv' # Data of geographic points of the stores
 url_2 = 'csv/pro_pre_pdv.csv' # Data of products-Prices-stores
 url_3 = 'csv/pre.csv'# Data of prices
 url_4 = 'csv/pro.csv' # DATA DE PRODUCTOS
-url_5 = 'csv/ago_pdv_pro.csv' # Data of products out stock for store and type of product
-url_6 = 'csv/ago.csv' # DATA DE AGOTADOS
+#url_5 = 'csv/ago_pdv_pro.csv' # Data of products out stock for store and type of product
+#url_6 = 'csv/ago.csv' # DATA DE AGOTADOS
 #uses this instruccion it the data change @st.cache(persist=True)( If you have a different use case where the data does not change so very often, you can simply use this)
 
 
 #loading data
-gea = pd.read_csv(url_1, sep=';')
+gea = pd.read_csv(url_1)
 data_2 = pd.read_csv(url_2)
 data_3 = pd.read_csv(url_3)
 data_4 = pd.read_csv(url_4)
 data_5 = pd.read_csv(url_5)
 data_6 = pd.read_csv(url_6)
 
-#creating selector of data at side bar
-
-#st.sidebar.checkbox("Show Analysis by State or city", True, key=1)
-
-#select_depto = st.sidebar.selectbox('Select a State',pd.unique(gea['Depto']))
-#select_ciudad = st.sidebar.selectbox('Select a city',pd.unique(gea['Ciudad']))
-
-#get the state selected in the selectbox
-#state_data = data_2[data_2['Depto']]
 
 
 
-#location_selection = locations.query("Depto == @select_depto & Ciudad == select_ciudad")
-#st.dataframe(location_selection)
 
 
 #st.write()
@@ -204,7 +203,7 @@ with stats_dash:
          select_ciudad = st.selectbox(
          'Select a city',(ATLANTICO))
     elif select_depto == 'BOGOTA D.C' :
-         select_ciudad="Bogota"
+         select_ciudad="Bogotá"
     elif select_depto == 'BOLIVAR' :
          select_ciudad = st.selectbox(
          'Select a city',(BOLIVAR))
@@ -281,15 +280,9 @@ with stats_dash:
     st.bar_chart(distribution_ago)
 
 
-#locations = [data_2,data_5]
-
-
-
-#map of stores
-#token
-#px.set_mapbox_access_token(open("https://api.mapbox.com/tokens/v2/risharky?access_token=sk.eyJ1IjoicmlzaGFya3kiLCJhIjoiY2w0eW04cXQ2MzBycTNjcGEyZzdldmo5bSJ9.84xlbi4AmGkF09XOJOGlBw").read())
 
 #giving format to coordinates
+gen_map = gea
 gea_2= gea.loc[gea['Ciudad'] == select_ciudad]
 gea_2["Lat"] = gea_2["Lat"].apply(lambda x: x.replace(',', '.'))
 gea_2["Lon"] = gea_2["Lon"].apply(lambda x: x.replace(',', '.'))
@@ -297,6 +290,12 @@ gea_2['Lat'] = gea_2['Lat'].astype(float)
 gea_2['Lon'] = gea_2['Lon'].astype(float)
 gea_2['latitude'] = gea_2['Lat']
 gea_2['longitude'] = gea_2['Lon']
+gen_map['latitude'] = gen_map['Lat']
+gen_map['longitude'] = gen_map['Lon']
+gen_map['latitude'] = gen_map['latitude'].apply(lambda x: x.replace(',', '.'))
+gen_map['longitude'] = gen_map['longitude'].apply(lambda x: x.replace(',', '.'))
+gen_map['latitude'] = gen_map['latitude'].astype(float)
+gen_map['longitude'] = gen_map['longitude'].astype(float)
 
 
 # defing map function
@@ -310,9 +309,10 @@ with map_dash:
 # función del mapa
 
 with map_dash:
+    st.markdown("Map of general view fo all stores")
+    st.map(data=gen_map, zoom=5, use_container_width=True)
 
-
-
+    st.markdown("Map of stores by selected city")
     t=(max(gea_2['latitude']))
     g=(max(gea_2['longitude']))
 
@@ -340,34 +340,5 @@ with map_dash:
     linear.add_to(base_map)
     folium_static(base_map)
 
-#def mapa():
-#
-#    from folium.plugins import MarkerCluster
 
-#    latitude = 5
-#    longitude = -73
 
-#    map_tiendas = folium.Map(location=[latitude, longitude], zoom_start=6, tiles="Stamen Toner")
-
-#    marker_cluster = MarkerCluster().add_to(map_tiendas)
-
-#    for Lat, Lon, Ciudad, Cadena in list(
-#            zip(
-#                gea["Lat"],
-#                gea["Lon"],
-#                gea["Ciudad"],
-#                gea["Cadena"]
-#            )
-#    ):
-#        folium.Marker(location=(Lat, Lon),
-#                      popup=f"lat: {Lat}, lon : {Lon}, ciudad: {Ciudad}, cadena : {Cadena}").add_to(marker_cluster)
-
-#    minimap = plugins.MiniMap()
-#    map_tiendas.add_child(minimap)
-#    folium.LayerControl().add_to(map_tiendas)
-
-    #rendering map in streamlit
-
-#    st_map =st_folium(map_tiendas, width=600)
-
-#st.write(mapa)
