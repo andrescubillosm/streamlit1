@@ -15,11 +15,21 @@
 import streamlit as st
 
 st.title(":blue_book: Conclusions and  Closing Remarks")
-st.markdown("More data to show")
+st.markdown("In this section you will find a summary or the main findings of the project, it should be noted that this project is for educational purposes only, if you have questions about the data you should ask directly to the owner of these that is the company Eficacia.SA, the members of the team 108 will be willing to answer questions about the conclusions of the project see project page to contact them.")
 
 #sidebar
 st.sidebar.markdown("Developed by team 108 :globe_with_meridians: for DS4A Colombia cohort 6.")
+st.sidebar.write(f'''
+    <a target="_blank" href="https://main.d1bdwgv20qxgp9.amplifyapp.com/index.html">
+        <button>
+            Return to project page
+        </button>
+    </a>
+    ''',
+    unsafe_allow_html=True
+)
 st.sidebar.markdown(" &copy; 2022 &copy;")
+
 
 
 #creating horizontal containers
@@ -41,15 +51,16 @@ with data_exp:
 
 #why we used that model
 with why_mod:
-    st.title("why that model")
-    st.markdown("why that model, why dont other")
+    st.title("Other model options")
+    st.markdown("Although several types of models were analyzed for better forecasting, the quality of the data should be improved, starting with the collection process itself, so that in the future it will be easier to apply other model options in order to be more effective in forecasting possible inventory stockouts.  It would also be important to add an inventory dataset for each brand or chain of warehouses so that the information could be trained or contrasted with more complex models or algorithms.")
 
 #error explanation
-with error_ex:
-    st.title("Error explanation")
-    st.markdown("Error explanation")
+#with error_ex:
+ #   st.title("Error explanation")
+  #  st.markdown("Error explanation")
 
 #conclusions
 with error_ex:
     st.title("Conclusions")
     st.markdown("Conclusions")
+    st.markdown("As an additional recommendation, a robust local or cloud-based production or deployment environment should be considered, which may generate costs depending on the size of the data and application deployed and the type of service purchased, given that the performance of the analysis, model and deployment requires memory and processing resources.")
