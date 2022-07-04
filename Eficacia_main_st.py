@@ -158,7 +158,7 @@ st.sidebar.markdown(" &copy; 2022 &copy;")
 #url_5 = 'https://eficaciadata.s3.amazonaws.com/ago_pdv_pro.csv' # Data of products out stock for store and type of product
 #url_6 = 'https://eficaciadata.s3.amazonaws.com/ago.csv' # DATA DE AGOTADOS
 
-url_1 = 'csv/geodata.csv' # Data of geographic points of the stores
+url_1 = 'csv/geodata1.csv' # Data of geographic points of the stores
 url_2 = 'csv/pro_pre_pdv.csv' # Data of products-Prices-stores
 url_3 = 'csv/pre.csv'# Data of prices
 url_4 = 'csv/pro.csv' # DATA DE PRODUCTOS
@@ -317,7 +317,6 @@ with map_dash:
     lon = list(gea_2['longitude'] )
     cadena = list(gea_2["Cadena"])
     ciudad = list(gea_2["Ciudad"])
-
     base_map = folium.Map(location=[t,g], zoom_start=10)
     linear = cmp.LinearColormap(
     ['#fef0d9', '#fec44f', '#ffff33','#ff7f00','#de2d26'],
