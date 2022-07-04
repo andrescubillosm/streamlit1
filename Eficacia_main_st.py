@@ -28,7 +28,7 @@ from streamlit_folium import folium_static
 import folium
 from folium.plugins import HeatMap
 import pandas as pd
-pd.options.mode.chained_assignment = None  # default='warn'
+#pd.options.mode.chained_assignment = None  # default='warn'
 import branca.colormap as cmp
 
 #SUBMENUS
@@ -168,16 +168,12 @@ url_6 = 'csv/ago.csv' # DATA DE AGOTADOS
 
 
 #loading data
-gea = pd.read_csv(url_1, low_memory=False)
-data_2 = pd.read_csv(url_2)
-data_3 = pd.read_csv(url_3)
-data_4 = pd.read_csv(url_4)
+gea = pd.read_csv(url_1, sep=';')
+data_2 = pd.read_csv(url_2, low_memory=False)
+data_3 = pd.read_csv(url_3, low_memory=False)
+data_4 = pd.read_csv(url_4, low_memory=False)
 data_5 = pd.read_csv(url_5, low_memory=False)
 data_6 = pd.read_csv(url_6, low_memory=False)
-
-
-
-
 
 
 #st.write()
@@ -269,7 +265,6 @@ with stats_dash:
          'Select a city',(VALLEDELCAUCA))
 
     data_2_fil= data_2.loc[data_2['Ciudad'] == select_ciudad]
-    
 
     st.write(data_2_fil.head(10))
     st.write(data_2_fil.describe())
@@ -341,6 +336,4 @@ with map_dash:
     # call to render Folium map in Streamlit
     linear.add_to(base_map)
     folium_static(base_map)
-
-
 
