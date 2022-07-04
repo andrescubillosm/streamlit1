@@ -128,8 +128,8 @@ st.sidebar.markdown(" &copy; 2022 &copy;")
 
 
 #Adding datasets
-#url_5 = 'https://eficaciadata.s3.amazonaws.com/ago_pdv_pro.csv' # Data of products out stock for store and type of product
-url_5 = 'csv/ago_pdv_pro.csv' # Data of products out stock for store and type of product
+url_5 = 'https://eficaciadata.s3.amazonaws.com/ago_pdv_pro.csv' # Data of products out stock for store and type of product
+#url_5 = 'csv/ago_pdv_pro.csv' # Data of products out stock for store and type of product
 #loading data
 data_5 = pd.read_csv(url_5, low_memory=False)
 

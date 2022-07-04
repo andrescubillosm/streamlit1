@@ -157,14 +157,14 @@ st.sidebar.markdown(" &copy; 2022 &copy;")
 url_2 = 'https://eficaciadata.s3.amazonaws.com/pro_pre_pdv.csv' # Data of products-Prices-stores
 #url_3 = 'https://eficaciadata.s3.amazonaws.com/pre.csv'# Data of prices
 #url_4 = 'https://eficaciadata.s3.amazonaws.com/pro.csv' # DATA DE PRODUCTOS
-#url_5 = 'https://eficaciadata.s3.amazonaws.com/ago_pdv_pro.csv' # Data of products out stock for store and type of product
+url_5 = 'https://eficaciadata.s3.amazonaws.com/ago_pdv_pro.csv' # Data of products out stock for store and type of product
 #url_6 = 'https://eficaciadata.s3.amazonaws.com/ago.csv' # DATA DE AGOTADOS
 
 url_1 = 'csv/geodata1.csv' # Data of geographic points of the stores
 #url_2 = 'csv/pro_pre_pdv.csv' # Data of products-Prices-stores
 url_3 = 'csv/pre.csv'# Data of prices
 url_4 = 'csv/pro.csv' # DATA DE PRODUCTOS
-url_5 = 'csv/ago_pdv_pro.csv' # Data of products out stock for store and type of product
+#url_5 = 'csv/ago_pdv_pro.csv' # Data of products out stock for store and type of product
 url_6 = 'csv/ago.csv' # DATA DE AGOTADOS
 #uses this instruccion it the data change @st.cache(persist=True)( If you have a different use case where the data does not change so very often, you can simply use this)
 
@@ -273,7 +273,7 @@ with stats_dash:
     distribution_categ = pd.DataFrame(data_2_fil['Categoria'].value_counts())   #creating a dataframe
     st.bar_chart(distribution_categ)
     st.text('Summary of data of products out stock for store and type of product')
-    data_5_fil= data_5.loc[data_5['Ciudad'] == select_ciudad]
+    data_5_fil= data_5.loc[data_5["Ciudad"] == select_ciudad]
     st.write(data_5_fil.describe())
     distribution_ago = pd.DataFrame(data_5_fil['Agotado'].value_counts())   #creating a dataframe
     st.bar_chart(distribution_ago)
