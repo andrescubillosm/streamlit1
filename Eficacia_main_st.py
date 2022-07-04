@@ -28,7 +28,9 @@ from streamlit_folium import folium_static
 import folium
 from folium.plugins import HeatMap
 import pandas as pd
-#pd.options.mode.chained_assignment = None  # default='warn'
+pd.options.mode.chained_assignment = "raise" # raises exception in case of warning
+pd.options.mode.chained_assignment = "warn"  # prints warning in case of warning, no exception is raised
+pd.options.mode.chained_assignment = None    # no warning message and no exception is raised
 import branca.colormap as cmp
 
 #SUBMENUS
@@ -264,7 +266,7 @@ with stats_dash:
          select_ciudad = st.selectbox(
          'Select a city',(VALLEDELCAUCA))
 
-    data_2_fil= data_2.loc[data_2['Ciudad'] == select_ciudad]
+    data_2_fil= data_2.loc[data_2["Ciudad"] == select_ciudad]
 
     st.write(data_2_fil.head(10))
     st.write(data_2_fil.describe())
@@ -280,7 +282,7 @@ with stats_dash:
 
 #giving format to coordinates
 gen_map = gea
-gea_2= gea.loc[gea['Ciudad'] == select_ciudad]
+gea_2= gea.loc[gea["Ciudad"] == select_ciudad]
 gea_2["Lat"] = gea_2["Lat"].apply(lambda x: x.replace(',', '.'))
 gea_2["Lon"] = gea_2["Lon"].apply(lambda x: x.replace(',', '.'))
 gea_2['Lat'] = gea_2['Lat'].astype(float)
